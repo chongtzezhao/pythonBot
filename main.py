@@ -51,3 +51,4 @@ async def on_message(message):
         print("unable to print attachments")'''
 
 client.run(TOKEN)
+print(f'Bot token: {TOKEN}')
