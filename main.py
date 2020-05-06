@@ -4,7 +4,7 @@ import discord
 #import aiohttp
 import subprocess
 
-TOKEN = #os.getenv('DISCORD_BOT_TOKEN')
+TOKEN = os.getenv('DISCORD_BOT_TOKEN')
 GUILD = "698935414345695254"
 client = discord.Client()
 
