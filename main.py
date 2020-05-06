@@ -26,6 +26,8 @@ async def on_message(message):
     if message.author == client.user:
         return
     
+    if message.content=="hi":
+        await message.channel.send("hi")
     if message.content[0] == '`' and message.content[-1] == '`':
         code = message.content.replace('`', '')
         if message.channel.id == 707423080238284872:
@@ -49,6 +51,6 @@ async def on_message(message):
                         f.write(test)
     except:
         print("unable to print attachments")'''
-        
+
 print(f'Bot token: {TOKEN}')
 client.run(TOKEN)
