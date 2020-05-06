@@ -8,7 +8,7 @@ import textwrap
 TOKEN = os.getenv('DISCORD_BOT_TOKEN')
 GUILD = "698935414345695254"
 client = discord.Client()
-OWNER = client.get_user(381870129706958858)
+OWNER = client.get_user(259680008635809792)
 
 ENVS_LIST = []
 

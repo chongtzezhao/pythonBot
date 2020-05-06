@@ -1,1 +1,4 @@
-print('okokkok')
+
+while True:
+  print("ok")
+
