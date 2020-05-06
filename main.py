@@ -8,7 +8,7 @@ import textwrap
 TOKEN = os.getenv('DISCORD_BOT_TOKEN')
 GUILD = "698935414345695254"
 client = discord.Client()
-OWNER = client.get_user(259680008635809792)
+OWNER_ID = 259680008635809792
 
 ENVS_LIST = []
 
@@ -57,6 +57,7 @@ async def on_message(message):
         except Exception as e:
             out = str(e)
             print("Unpredicted error: "+str(out))
+            OWNER = client.get_user(OWNER_ID)
             await OWNER.send(
                 f'''Unpredicted error: {out}
                 Channel: {message.channel.id}
