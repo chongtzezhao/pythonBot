@@ -3,6 +3,7 @@ import random
 import discord
 #import aiohttp
 import subprocess
+import textwrap
 
 TOKEN = os.getenv('DISCORD_BOT_TOKEN')
 GUILD = "698935414345695254"
@@ -28,17 +29,22 @@ async def on_message(message):
     
     if message.content=="hi":
         await message.channel.send("hi")
-    try:
-        if message.content[0] == '`' and message.content[-1] == '`':
+    if message.content[0] == '`' and message.content[-1] == '`':
+        out = "your code failed :(\nHere is the error:\n"
+        try:
             code = message.content.replace('`', '')
+            code = code.replace('while True:', 'for i in range(9999):')
             print(code, file=open("envGLOB.py", 'w+'))
             proc = subprocess.Popen(
                 ["python", "-c", "import envGLOB"], stdout=subprocess.PIPE)
             out = proc.communicate()[0].decode('latin-1')
+        except Exception as e:
+            out+=e
+        if len(out)>0:
             print(out)
-            await message.channel.send(out)
-    except Exception as e:
-        print(e)
+            arr = textwrap.wrap(out, 2000)
+            for item in arr:
+                await message.channel.send(item)
 
     return
     

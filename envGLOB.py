@@ -1,1 +1,1 @@
-print(f"hello")
+print("use double quotes")
