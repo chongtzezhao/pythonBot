@@ -1,1 +1,1 @@
-print("use double quotes")
+print('okokkok')
