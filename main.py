@@ -3,6 +3,7 @@ import random
 import discord
 import aiohttp
 import subprocess
+from flask import Flask, render_template
 
 TOKEN = #os.getenv('DISCORD_BOT_TOKEN')
 GUILD = "698935414345695254"
@@ -50,3 +51,11 @@ async def on_message(message):
         print("unable to print attachments")
 
 client.run(TOKEN)
+app = Flask(__name__)
+if __name__ == "__main__":
+    app.secret_key = os.urandom(12)
+    # for local deployment
+    #app.run(debug=True)
+    # for heroku
+    port = int(os.environ.get('PORT', 5000))
+    app.run(host='0.0.0.0', port=port, debug=True)
