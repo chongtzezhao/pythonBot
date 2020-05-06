@@ -28,14 +28,17 @@ async def on_message(message):
     
     if message.content=="hi":
         await message.channel.send("hi")
-    if message.content[0] == '`' and message.content[-1] == '`':
-        code = message.content.replace('`', '')
-        print(code, file=open("envGLOB.py", 'w+'))
-        proc = subprocess.Popen(
-            ["python", "-c", "import envGLOB"], stdout=subprocess.PIPE)
-        out = proc.communicate()[0].decode('latin-1')
-        print(out)
-        await message.channel.send(out)
+    try:
+        if message.content[0] == '`' and message.content[-1] == '`':
+            code = message.content.replace('`', '')
+            print(code, file=open("envGLOB.py", 'w+'))
+            proc = subprocess.Popen(
+                ["python", "-c", "import envGLOB"], stdout=subprocess.PIPE)
+            out = proc.communicate()[0].decode('latin-1')
+            print(out)
+            await message.channel.send(out)
+    except Exception as e:
+        print(e)
 
     return
     
