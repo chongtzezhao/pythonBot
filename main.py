@@ -37,7 +37,8 @@ async def on_message(message):
             await message.channel.send(out)
 
     return
-    try:
+    
+    '''try:
         with aiohttp.ClientSession() as session:
             async with session.get(message.attachments[0]['url']) as resp:
                 data = await resp.json()
@@ -47,6 +48,6 @@ async def on_message(message):
                     with open("cardtest2.png", "wb") as f:
                         f.write(test)
     except:
-        print("unable to print attachments")
+        print("unable to print attachments")'''
 
 client.run(TOKEN)
