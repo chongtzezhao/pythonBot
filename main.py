@@ -30,13 +30,12 @@ async def on_message(message):
         await message.channel.send("hi")
     if message.content[0] == '`' and message.content[-1] == '`':
         code = message.content.replace('`', '')
-        if message.channel.id == 707423080238284872:
-            print(code, file=open("envGLOB.py", 'w+'))
-            proc = subprocess.Popen(
-                ["python", "-c", "import envGLOB"], stdout=subprocess.PIPE)
-            out = proc.communicate()[0].decode('latin-1')
-            print(out)
-            await message.channel.send(out)
+        print(code, file=open("envGLOB.py", 'w+'))
+        proc = subprocess.Popen(
+            ["python", "-c", "import envGLOB"], stdout=subprocess.PIPE)
+        out = proc.communicate()[0].decode('latin-1')
+        print(out)
+        await message.channel.send(out)
 
     return
     
