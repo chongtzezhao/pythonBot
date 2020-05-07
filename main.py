@@ -45,6 +45,8 @@ async def on_message(message):
         #code = code.replace("\n", "\n\t")
         #code = "try:\n\t"+code+"\nexcept Exception as e:\n\tprint(f'`{e}`')"
         print(code, file=open("envGLOB.py", 'w+'))  # write to file
+        print(open("envGLOB.py", 'r').readlines())
+        return
         try:
             out = check_output("python envGLOB.py",
                                 stderr=STDOUT, timeout=timeout).decode()
