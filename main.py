@@ -63,7 +63,7 @@ async def on_message(message):
             await OWNER.send(
                 f'Unpredicted error: {out}\n\
                 Channel: {message.channel.id}\n\
-                UserID: {message.author.id}
+                UserID: {message.author.id}\
                 '
             )
         if len(out)>0:
