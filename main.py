@@ -46,12 +46,10 @@ async def on_message(message):
         #code = "try:\n\t"+code+"\nexcept Exception as e:\n\tprint(f'`{e}`')"
         print(code, file=open("envGLOB.py", 'w+'))  # write to file
         try:
-            cmd = "python envGLOB.py"
-            out = check_output(cmd,
+            out = check_output("python","envGlob,py",
                                 stderr=STDOUT, timeout=timeout).decode()
         except Exception as e:
             info = f'Unpredicted error: check_output failed\n{e}\n\
-                cmd: {cmd}\n\
                 Channel: {message.channel.id}\n\
                 UserID: {message.author.id}\
                 '
