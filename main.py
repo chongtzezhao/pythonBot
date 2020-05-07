@@ -48,28 +48,6 @@ async def on_message(message):
         try:
             out = check_output(['python', 'envGLOB.py', '', 'test.txt'],
                                 stderr=STDOUT, timeout=timeout).decode()
-        except Exception as e:
-            info = f'Unpredicted error: check_output failed\n{e}\n\
-                Channel: {message.channel.id}\n\
-                UserID: {message.author.id}\
-                '
-            print(info)
-            OWNER = client.get_user(OWNER_ID)
-            await OWNER.send(info)
-        try:
-            proc = Popen("python envGLOB.py", stderr=STDOUT,  # Merge stdout and stderr
-                         stdout=PIPE, shell=True)
-            out = '```'+proc.communicate()[0].decode()+'```'
-        except Exception as e:
-            info = f'Unpredicted error: Popen failed\n{e}\n\
-                Channel: {message.channel.id}\n\
-                UserID: {message.author.id}\
-                '
-            print(info)
-            OWNER = client.get_user(OWNER_ID)
-            await OWNER.send(info)
-
-        """
         except TimeoutExpired as e:  # Infinite loop 
             out = '```'+str(e)+'```'
         except CalledProcessError as e:  # Indentation error, undefined error etc
@@ -85,7 +63,7 @@ async def on_message(message):
                 Channel: {message.channel.id}\n\
                 UserID: {message.author.id}\
                 '
-            )"""
+            )
         if len(out)>0:
             print(out)
             while out:
