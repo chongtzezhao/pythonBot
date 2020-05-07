@@ -17,14 +17,13 @@ ENVS_LIST = []
 async def on_ready():
     print(f'{client.user.name} has connected to Discord!')
     await client.change_presence(activity=discord.Activity(
-        type=discord.ActivityType.watching, name="for code"))
+        type=discord.ActivityType.watching, name='for "import this"'))
 
 @client.event
 async def on_member_join(member):
-    return
     await member.create_dm()
     await member.dm_channel.send(
-        f'Hi {member.name}, welcome to the server!'
+        f'Hi {member.name}, welcome to the server!\nRun code by enclosing them in backticks "`"'
     )
 
 @client.event
