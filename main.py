@@ -51,7 +51,7 @@ async def on_message(message):
         except TimeoutExpired as e:  # Infinite loop 
             out = '```'+str(e)+'```'
         except CalledProcessError as e:  # Indentation error, undefined error etc
-            proc = Popen(".\envGLOB.py", stderr=STDOUT,  # Merge stdout and stderr
+            proc = Popen("envGLOB.py", stderr=STDOUT,  # Merge stdout and stderr
                         stdout=PIPE, shell=True)
             out = '```'+proc.communicate()[0].decode()+'```'
         except Exception as e:
