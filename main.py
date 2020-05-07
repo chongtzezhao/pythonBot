@@ -61,7 +61,7 @@ async def on_message(message):
                          stdout=PIPE, shell=True)
             out = '```'+proc.communicate()[0].decode()+'```'
         except Exception as e:
-            info = f'Unpredicted error: check_output failed\n{e}\n\
+            info = f'Unpredicted error: Popen failed\n{e}\n\
                 Channel: {message.channel.id}\n\
                 UserID: {message.author.id}\
                 '
