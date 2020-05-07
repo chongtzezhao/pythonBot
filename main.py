@@ -48,15 +48,14 @@ async def on_message(message):
         try:
             out = check_output("./envGLOB.py",
                                 stderr=STDOUT, timeout=timeout).decode()
-        except:
-            print("check output failed")
-            OWNER = client.get_user(OWNER_ID)
-            await OWNER.send(
-                f'Unpredicted error: check output failed\n\
+        except Exception as e:
+            info = f'Unpredicted error: check_output failed\n{e}\n\
                 Channel: {message.channel.id}\n\
                 UserID: {message.author.id}\
                 '
-            )
+            print(info)
+            OWNER = client.get_user(OWNER_ID)
+            await OWNER.send(info)
             return
         """
         except TimeoutExpired as e:  # Infinite loop 
