@@ -59,10 +59,10 @@ async def on_message(message):
             print("Unpredicted error: "+str(out))
             OWNER = client.get_user(OWNER_ID)
             await OWNER.send(
-                f'''Unpredicted error: {out}
-                Channel: {message.channel.id}
+                f'Unpredicted error: {out}\n\
+                Channel: {message.channel.id}\n\
                 UserID: {message.author.id}
-                '''
+                '
             )
         if len(out)>0:
             print(out)
