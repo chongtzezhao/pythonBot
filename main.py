@@ -45,7 +45,7 @@ async def on_message(message):
         #code = code.replace("\n", "\n\t")
         #code = "try:\n\t"+code+"\nexcept Exception as e:\n\tprint(f'`{e}`')"
         print(code, file=open("envGLOB.py", 'w+'))  # write to file
-        
+
         try:
             out = check_output(['python', 'envGLOB.py', '', 'test.txt'],
                                 stderr=STDOUT, timeout=timeout).decode()
@@ -57,7 +57,7 @@ async def on_message(message):
             out = '```'+proc.communicate()[0].decode()+'```'
         except Exception as e:
             out = str(e)
-            print(f"Unpredicted error: {out}")
+            print("Unpredicted error:")
             OWNER = client.get_user(OWNER_ID)
             try:
                 await OWNER.send(
