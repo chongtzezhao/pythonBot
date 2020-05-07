@@ -48,10 +48,20 @@ async def on_message(message):
         try:
             out = check_output("envGLOB.py",
                                 stderr=STDOUT, timeout=timeout).decode()
+        except:
+            print("check output failed")
+            OWNER = client.get_user(OWNER_ID)
+            await OWNER.send(
+                f'Unpredicted error: check output failed\n\
+                Channel: {message.channel.id}\n\
+                UserID: {message.author.id}\
+                '
+            )
+            return
         except TimeoutExpired as e:  # Infinite loop 
             out = '```'+str(e)+'```'
         except CalledProcessError as e:  # Indentation error, undefined error etc
-            proc = Popen("envGLOB.py", stderr=STDOUT,  # Merge stdout and stderr
+            proc = Popen("python envGLOB.py", stderr=STDOUT,  # Merge stdout and stderr
                         stdout=PIPE, shell=True)
             out = '```'+proc.communicate()[0].decode()+'```'
         except Exception as e:
