@@ -58,6 +58,7 @@ async def on_message(message):
                 '
             )
             return
+        """
         except TimeoutExpired as e:  # Infinite loop 
             out = '```'+str(e)+'```'
         except CalledProcessError as e:  # Indentation error, undefined error etc
@@ -73,7 +74,7 @@ async def on_message(message):
                 Channel: {message.channel.id}\n\
                 UserID: {message.author.id}\
                 '
-            )
+            )"""
         if len(out)>0:
             print(out)
             while out:
