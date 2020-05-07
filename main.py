@@ -49,7 +49,7 @@ async def on_message(message):
             out = check_output(['python', 'envGLOB.py', '', 'test.txt'],
                                 stderr=STDOUT, timeout=timeout).decode()
         except TimeoutExpired as e:  # Infinite loop 
-            out = f'```Your code timed out after {timeout} seconds```'
+            out = f'```TimeoutExpired: Your code timed out after {timeout} seconds```'
         except CalledProcessError as e:  # Indentation error, undefined error etc
             proc = Popen("python envGLOB.py", stderr=STDOUT,  # Merge stdout and stderr
                         stdout=PIPE, shell=True)
