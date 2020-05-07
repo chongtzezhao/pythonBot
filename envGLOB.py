@@ -1,4 +1,3 @@
 
-while True:
-  print("ok")
+print(2)
 

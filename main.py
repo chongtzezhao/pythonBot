@@ -45,6 +45,7 @@ async def on_message(message):
         #code = code.replace("\n", "\n\t")
         #code = "try:\n\t"+code+"\nexcept Exception as e:\n\tprint(f'`{e}`')"
         print(code, file=open("envGLOB.py", 'w+'))  # write to file
+        
         try:
             out = check_output(['python', 'envGLOB.py', '', 'test.txt'],
                                 stderr=STDOUT, timeout=timeout).decode()
@@ -56,14 +57,28 @@ async def on_message(message):
             out = '```'+proc.communicate()[0].decode()+'```'
         except Exception as e:
             out = str(e)
-            print("Unpredicted error: "+str(out))
+            print(f"Unpredicted error: {out}")
             OWNER = client.get_user(OWNER_ID)
-            await OWNER.send(
-                f'Unpredicted error: {out}\n\
-                Channel: {message.channel.id}\n\
-                UserID: {message.author.id}\
-                '
-            )
+            try:
+                await OWNER.send(
+                    f'```\
+Server/Guild ID: {message.guild.id}\n\
+Server/Guild name: {message.guild.name}\n\
+Channel ID: {message.channel.id}\n\
+Channel name: {message.channel.name}\n\
+User ID: {message.author.id}\n\
+Name: {message.author.name}\n\
+Display Name: {message.author.display_name}\
+                    ```'
+                )
+            except:
+                await OWNER.send(
+                    f'```\
+User ID: {message.author.id}\n\
+Name: {message.author.name}\n\
+Display Name: {message.author.display_name}\
+                    ```'
+                )
         if len(out)>0:
             print(out)
             while out:
