@@ -45,15 +45,13 @@ async def on_message(message):
         #code = code.replace("\n", "\n\t")
         #code = "try:\n\t"+code+"\nexcept Exception as e:\n\tprint(f'`{e}`')"
         print(code, file=open("envGLOB.py", 'w+'))  # write to file
-        print(open("envGLOB.py", 'r').readlines())
-        return
         try:
-            out = check_output("python envGLOB.py",
+            out = check_output(".\envGLOB.py",
                                 stderr=STDOUT, timeout=timeout).decode()
         except TimeoutExpired as e:  # Infinite loop 
             out = '```'+str(e)+'```'
         except CalledProcessError as e:  # Indentation error, undefined error etc
-            proc = Popen("python envGLOB.py", stderr=STDOUT,  # Merge stdout and stderr
+            proc = Popen(".\envGLOB.py", stderr=STDOUT,  # Merge stdout and stderr
                         stdout=PIPE, shell=True)
             out = '```'+proc.communicate()[0].decode()+'```'
         except Exception as e:
