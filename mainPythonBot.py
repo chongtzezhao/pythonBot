@@ -1,14 +1,13 @@
 import os
 import random
 import discord
-#import aiohttp
 from subprocess import CalledProcessError, check_output, STDOUT, TimeoutExpired, Popen, PIPE
 from sys import exit
+from threading import Thread
 from messages import *
 
 
 TOKEN = os.getenv('DISCORD_BOT_TOKEN')
-GUILD = "698935414345695254"
 client = discord.Client()
 OWNER_ID = 259680008635809792
 HIDDENFILES = ["mainPythonBot.py", "messages.py"]
@@ -56,7 +55,6 @@ async def on_message(message):
                     await fakeError(message, lines[i].strip(), i+1, FILE)
                     await alertOwner(message, OWNER_ID, FILE, client)
                     return
-
         try:
             out = check_output(['python', 'envGLOB.py', '', 'test.txt'],
                                 stderr=STDOUT, timeout=timeout).decode()
@@ -77,20 +75,6 @@ async def on_message(message):
             while out:
                 await message.channel.send(out[:min(2000, len(out))])
                 out = out[min(2000, len(out)):]
-
-    return
-    
-    '''try:
-        with aiohttp.ClientSession() as session:
-            async with session.get(message.attachments[0]['url']) as resp:
-                data = await resp.json()
-                card = data["card_image"]
-                async with session.get(card) as resp2:
-                    test = await resp2.read()
-                    with open("cardtest2.png", "wb") as f:
-                        f.write(test)
-    except:
-        print("unable to print attachments")'''
 
 
 
