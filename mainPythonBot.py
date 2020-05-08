@@ -35,11 +35,12 @@ async def on_message(message):
     
     if message.content=="test":
         await message.channel.send("hi")
-    if message[:2]=='py':
-        message = message[2:].strip()
-        if message.content[0] != '`' or message.content[-1] != '`': return
+    if message.content[:2] == 'py':
+        code = message.content[2:].strip()
+        if code[0] != '`' or code[-1] != '`':
+            return
         timeout = 5
-        code = message.content.replace('`', '')
+        code = code.replace('`', '')
 
         if code.find("input(")>-1:
             await message.channel.send("Sorry, this bot currently does not support user inputs :(")
