@@ -35,7 +35,9 @@ async def on_message(message):
     
     if message.content=="test":
         await message.channel.send("hi")
-    if message.content[0] == '`' and message.content[-1] == '`':
+    if message[:2]=='py':
+        message = message[2:].strip()
+        if message.content[0] != '`' or message.content[-1] != '`': return
         timeout = 5
         code = message.content.replace('`', '')
 
