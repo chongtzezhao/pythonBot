@@ -3,7 +3,7 @@ import random
 import discord
 from subprocess import CalledProcessError, check_output, STDOUT, TimeoutExpired, Popen, PIPE
 from sys import exit
-from threading import Thread
+import threading
 from messages import *
 
 
