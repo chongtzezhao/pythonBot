@@ -32,11 +32,11 @@ async def alertOwner(message, OWNER_ID, errorName, client):
     OWNER = client.get_user(OWNER_ID)
     try:
         creds = [message.guild.id,
-                    message.guild.name, message.channel.id, message.channel.name, message.author.id, message.author.name, message.author.display_name]
+                 message.guild.name, message.channel.id, message.channel.name, message.author.id, message.author.name, message.author.display_name]
         toSend = channelError(creds)
     except:
         creds = [message.author.id, message.author.name,
-                    message.author.display_name]
+                 message.author.display_name]
         toSend = userError(creds)
     toSend += f'\n{errorName}'
     await OWNER.send('```'+toSend+'```')
