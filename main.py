@@ -4,13 +4,11 @@ import random
 import discord
 import asyncio
 from discord.ext import commands
-from subprocess import CalledProcessError, check_output, STDOUT, TimeoutExpired, Popen, PIPE
-import threading
+import subprocess
 from cleaner import start_cleaning
 from process import fakeFileError, fakeImportError, findBackticks, prepend, run_async
 from env_process import load_env, output_env, write_env
 from alerts import addAlert, sendResponse
-from detect_spam import *
 from keep_alive import keep_alive
 
 TOKEN = os.getenv("DISCORD_BOT_TOKEN")
@@ -63,15 +61,15 @@ async def process_code(message):
                 await addAlert(message, OWNER_ID, FILE, client)
                 return
 
-   
+    timeout=5
     try:
-        out = check_output(['python', 'envGLOB.py', '', 'test.txt'],
-                            stderr=STDOUT, timeout=5).decode()
+        out = subprocess.check_output(['python', 'envGLOB.py', '', 'test.txt'],
+                            stderr=subprocess.STDOUT, timeout=timeout).decode()
 
-    except TimeoutExpired:  # Infinite loop 
+    except subprocess.TimeoutExpired:  # Infinite loop 
         out = f'```TimeoutExpired: Your code timed out after {timeout} seconds```'
-    except CalledProcessError:  # Indentation error, undefined error etc
-        proc = Popen("python envGLOB.py", stderr=STDOUT, stdout=PIPE, shell=True)
+    except subprocess.CalledProcessError:  # Indentation error, undefined error etc
+        proc = subprocess.Popen("python envGLOB.py", stderr=subprocess.STDOUT, subprocess.STDOUT=subprocess.PIPE, shell=True)
         encoded = proc.communicate()[0]
         out = '```'+encoded.decode()+'```'
     except Exception as e:
