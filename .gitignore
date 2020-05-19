@@ -1,7 +1,6 @@
 /__pycache__
 .env
 /envs
-pyproject.toml
 envGLOB.py
 poetry.lock
 spam_data.json
