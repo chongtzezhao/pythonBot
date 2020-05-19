@@ -6,7 +6,7 @@ import asyncio
 from discord.ext import commands
 import subprocess
 from cleaner import start_cleaning
-from process import fakeFileError, fakeImportError, findBackticks, prepend, run_async
+from process import fakeFileError, fakeImportError, findBackticks, prepend
 from env_process import load_env, output_env, write_env
 from alerts import addAlert, sendResponse
 from keep_alive import keep_alive
@@ -69,7 +69,7 @@ async def process_code(message):
     except subprocess.TimeoutExpired:  # Infinite loop 
         out = f'```TimeoutExpired: Your code timed out after {timeout} seconds```'
     except subprocess.CalledProcessError:  # Indentation error, undefined error etc
-        proc = subprocess.Popen("python envGLOB.py", stderr=subprocess.STDOUT, subprocess.STDOUT=subprocess.PIPE, shell=True)
+        proc = subprocess.Popen("python envGLOB.py", stderr=subprocess.STDOUT, STDOUT=subprocess.PIPE, shell=True)
         encoded = proc.communicate()[0]
         out = '```'+encoded.decode()+'```'
     except Exception as e:
