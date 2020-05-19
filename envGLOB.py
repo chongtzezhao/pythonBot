@@ -11,5 +11,7 @@ def secure_importer(name, globals=None, locals=None, fromlist=(), level=0):
 
 __builtins__.__dict__['__import__'] = secure_importer
 
-io
+y=10
+x=4
+print('73a3290c-340b-44b1-9899-8542f0894495')
 

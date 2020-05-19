@@ -4,6 +4,7 @@ import re
 import os
 from os import listdir
 from os.path import isfile, join
+import copy
 os.environ['TZ'] = 'Singapore'
 time.tzset()
 
@@ -20,7 +21,7 @@ def load_env(contents):
     if index==-1: index = len(contents)
     env_name = contents[1:index].strip()
     if env_name not in envs:
-        data = {"vars":{}, 'imports':{}, 'time':{'created':time.strftime("%Y-%m-%d %H:%M:%S"), 'modified': '', 'accessed':''}}
+        data = {"vars":{}, 'imports':{}, 'time':{'created':time.strftime("%Y-%m-%d %H:%M:%S"), 'modified': time.strftime("%Y-%m-%d %H:%M:%S"), 'accessed':time.strftime("%Y-%m-%d %H:%M:%S")}}
         with open(f'envs/{env_name}.json', 'w+') as outfile:
             json.dump(data, outfile)
     
@@ -58,6 +59,7 @@ def write_env(name, data):
     global SEP
     lines = data.split('\n')
     from_file = json.load(open(f'envs/{name}.json'))
+    original = copy.deepcopy(from_file)
     print("json:",from_file)
     print("data:",data)
     for line in lines:
@@ -71,5 +73,10 @@ def write_env(name, data):
         if arr[2]=='set': tmp=list(eval(arr[1]))
         from_file['vars'][arr[0]]=tmp
     print(from_file)
+    print(original)
+    print(from_file==original)
+    if from_file!=original:
+        from_file['time']['modified'] = time.strftime("%Y-%m-%d %H:%M:%S")
+    from_file['time']['accessed'] = time.strftime("%Y-%m-%d %H:%M:%S")
     with open(f'envs/{name}.json', 'w') as outfile:
         json.dump(from_file, outfile)

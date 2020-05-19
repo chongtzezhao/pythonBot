@@ -49,3 +49,32 @@ def secure_importer(name, globals=None, locals=None, fromlist=(), level=0):
 __builtins__.__dict__['__import__'] = secure_importer
 
 """
+
+async def child(proc):
+    await proc.wait()
+
+async def run_async():
+    timeout = 5
+    out = ''
+    create = asyncio.create_subprocess_shell(
+    'python envGLOB.py',
+    stdout=asyncio.subprocess.PIPE)
+    proc = await create
+    try:
+
+        await asyncio.wait_for(child(proc), timeout)
+        (stdout, stderr) = await proc.communicate()
+        out = stdout.decode()
+    except asyncio.TimeoutError:
+        out = f'```TimeoutExpired: Your code timed out after {timeout} seconds```'
+        proc.terminate()
+    except Exception as e:
+        out = "Something went wrong"
+        print("Unpredicted error:")
+        print(e)
+    if proc.returncode: # equivalent of CalledProcessError in synchronous version
+        proc = subprocess.Popen("python envGLOB.py", stderr=subprocess.STDOUT, stdout=subprocess.PIPE, shell=True)
+        encoded = proc.communicate()[0]
+        out = '```'+encoded.decode()+'```'
+    return out
+        
