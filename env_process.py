@@ -50,7 +50,7 @@ def output_env(code):
             start, end = k.span()
             name = line[start:end]
             if name in KEYWORDS: continue
-            output+=f"try: print('{name}{SEP}'+str({name})+'{SEP}'+str(type({name})) )\nexcept: pass\n"
+            output+=f"try: print('{name}{SEP}'+str({name})+'{SEP}'+str(type({name})) )\nexcept: print('{name}')\n"
     return output
 
     
@@ -65,6 +65,12 @@ def write_env(name, data):
     for line in lines:
         if not line: continue
         arr = line.split(SEP)
+        if len(arr) < 3:
+            try:
+                del from_file['vars'][arr[0]]
+            except:
+                pass
+            continue
         arr[2] = arr[2].split("'")[1]
         if arr[2]=='str': 
             arr[1].replace("'", "\'")
