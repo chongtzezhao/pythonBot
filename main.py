@@ -23,7 +23,7 @@ GLOBAL_VARS = ["OWNER_ID", "HIDDENFILES", "HIDDENDIRS", "RETORTS", "TOKEN", "ILL
 async def on_ready():
     print(f'{client.user.name} has connected to Discord!')
     await client.change_presence(activity=discord.Activity(
-        type=discord.ActivityType.watching, name='for py```import this```'))
+        type=discord.ActivityType.watching, name='for "py help"'))
 
 @client.event
 async def on_member_join(member):
@@ -121,11 +121,14 @@ async def on_message(message):
             await owner.send("Success! ")
             return
 
+    if message.content == 'py help':
+        await message.channel.send('I am help you with anything! (regarding python of course)\nStart your message with the keyphrase "py" and enclose your code within backticks aka "``" and watch the magic happen!\n\nFind my source code on https://github.com/thepoppycat/pythonBot')
+        return
+
     if message.guild is None:
-        await addAlert(message, OWNER_ID, "user pmed bot", client)
         if message.content[:2]=='py':
             await message.channel.send("we encourage open source :)) means your code can and should be seen by all")
-        await addAlert(message, OWNER_ID, "user pmed bot", client)
+            await addAlert(message, OWNER_ID, "user pmed bot", client)
         return
 
     #await message.channel.send(message.content, tts=True)

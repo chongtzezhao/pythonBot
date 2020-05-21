@@ -5,8 +5,8 @@ import time
 from pprint import pprint
 import requests
 
-ALLOWED = ['pyproject.toml', '.upm', 'poetry.lock', 'envGLOB.py', 'README.md', 'requirements.txt', '__pycache__', 'keep_alive.py', 'spam_data.json', 'detect_spam.py', 'process.py', 'alerts.py', 'main.py', 'file_manager.py', 'envs', 'env_process.py']
-RESTORE = ['pyproject.toml', 'poetry.lock', 'README.md', 'requirements.txt', 'keep_alive.py', 'spam_data.json', 'detect_spam.py', 'process.py', 'alerts.py', 'main.py', 'file_manager.py', 'env_process.py']
+ALLOWED = ['pyproject.toml', '.upm', 'poetry.lock', 'envGLOB.py', 'README.md', 'requirements.txt', '__pycache__', 'keep_alive.py', 'spam_data.json', 'detect_spam.py', 'process.py', 'alerts.py', 'main.py', 'file_manager.py', 'envs', 'env_process.py', '.gitignore']
+RESTORE = ['pyproject.toml', 'poetry.lock', 'README.md', 'requirements.txt', 'keep_alive.py', 'spam_data.json', 'detect_spam.py', 'process.py', 'alerts.py', 'main.py', 'file_manager.py', 'env_process.py', '.gitignore']
 TELEGRAM_BOT_TOKEN = os.getenv('TELEGRAM_BOT_TOKEN')
 os.environ['TELEGRAM_BOT_TOKEN']='[REDACTED]'
 
@@ -24,7 +24,7 @@ def clean():
                 found = True
         if not found:
             print("nothing found")
-        time.sleep(20)
+        time.sleep(30)
         #print(os.listdir())
 
 def check():
@@ -36,10 +36,15 @@ def check():
             if contents=='file does not exist':
                 print(f'Skipped: {file}')
                 continue
-            if contents!=open(item).read():
+            try:
+                here = open(item).read()
+                if contents!=open(item).read():
+                    requests.get(
+                        f'https://api.telegram.org/bot{TELEGRAM_BOT_TOKEN}/sendMessage?chat_id=956428669&text=yo python bot has critical files edited, name = {item}.\nSend "py restore" (in discord) to restore files')
+            except:
                 requests.get(
-                    f'https://api.telegram.org/bot{TELEGRAM_BOT_TOKEN}/sendMessage?chat_id=956428669&text=yo python bot critical files got edited, name = {item}.\nSend "py restore" (in discord) to restore files')
-        time.sleep(20)
+                    f'https://api.telegram.org/bot{TELEGRAM_BOT_TOKEN}/sendMessage?chat_id=956428669&text=yo python bot has critical files missing.\nname = {item}')
+        time.sleep(30)
 
 def restore_files():
     print('restoring...')
