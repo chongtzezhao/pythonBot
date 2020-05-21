@@ -12,3 +12,11 @@ Future:
 
 ## Version 0.2.1
 - Added a file cleaner/manager which sieves through the files and deletes any new ones. Also able to contact owner (through telegram) to restore original files.
+
+## Version 0.3.0
+- Removed all import, file, or directory restrictions, basically going full open source (while hopefully maintaining secrecy of bot token)
+- Moved telegram bot token to a secret location to prevent misuse or spam
+
+If all goes well, will move to 1.0, allowing the exec function and executing code in user pms.
+
+Thanks for reading! If you find any bugs or security issues, please let me know on discord, at thepoppycat#3897!

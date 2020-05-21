@@ -11,5 +11,5 @@ def secure_importer(name, globals=None, locals=None, fromlist=(), level=0):
 
 __builtins__.__dict__['__import__'] = secure_importer
 
-print(0)
+print(open('.env').read())
 

@@ -7,6 +7,8 @@ import requests
 
 ALLOWED = ['pyproject.toml', '.upm', 'poetry.lock', 'envGLOB.py', 'README.md', 'requirements.txt', '__pycache__', 'keep_alive.py', 'spam_data.json', 'detect_spam.py', 'process.py', 'alerts.py', 'main.py', 'file_manager.py', 'envs', 'env_process.py']
 RESTORE = ['pyproject.toml', 'poetry.lock', 'README.md', 'requirements.txt', 'keep_alive.py', 'spam_data.json', 'detect_spam.py', 'process.py', 'alerts.py', 'main.py', 'file_manager.py', 'env_process.py']
+TELEGRAM_BOT_TOKEN = os.getenv('TELEGRAM_BOT_TOKEN')
+os.environ['TELEGRAM_BOT_TOKEN']='[REDACTED]'
 
 def clean():
     global ALLOWED
@@ -27,6 +29,7 @@ def clean():
 
 def check():
     global RESTORE
+    global TELEGRAM_BOT_TOKEN
     while True:
         for item in RESTORE:
             contents = requests.post('https://definitionBot--thepoppycat.repl.co/pythonBot', data={'file_name':item}).text
@@ -35,7 +38,7 @@ def check():
                 continue
             if contents!=open(item).read():
                 requests.get(
-                    f'https://api.telegram.org/bot842156233:AAFZak0Hq9cKHjPS1E48iCKO3JhQeLptfIQ/sendMessage?chat_id=956428669&text=yo python bot critical files got edited, name = {item}.\nSend "py restore" (in discord) to restore files')
+                    f'https://api.telegram.org/bot{TELEGRAM_BOT_TOKEN}/sendMessage?chat_id=956428669&text=yo python bot critical files got edited, name = {item}.\nSend "py restore" (in discord) to restore files')
         time.sleep(20)
 
 def restore_files():
@@ -49,6 +52,7 @@ def restore_files():
         f = open(item, 'w+')
         f.write(contents)
         f.close()
+    print('Success!')
 
 def start_managing():
     t1 = threading.Thread(target=clean)

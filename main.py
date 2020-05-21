@@ -10,11 +10,11 @@ from alerts import addAlert, sendResponse
 from keep_alive import keep_alive
 
 TOKEN = os.getenv("DISCORD_BOT_TOKEN")
-os.environ["DISCORD_BOT_TOKEN"]="REDACTED"
+os.environ["DISCORD_BOT_TOKEN"]="[REDACTED]"
 client = discord.Client()
 OWNER_ID = 259680008635809792
-HIDDENFILES = ['pyproject.toml', '.upm', 'poetry.lock', 'envGLOB.py', 'README.md', 'requirements.txt', '__pycache__', 'keep_alive.py', 'spam_data.json', 'detect_spam.py', 'process.py', 'alerts.py', 'main.py', 'cleaner.py', 'envs', 'env_process.py', 'main_backup.py']
-HIDDENDIRS = ["/proc", "/usr/lib/python", "/home/"]
+HIDDENFILES = []#'pyproject.toml', '.upm', 'poetry.lock', 'envGLOB.py', 'README.md', 'requirements.txt', '__pycache__', 'keep_alive.py', 'spam_data.json', 'detect_spam.py', 'process.py', 'alerts.py', 'main.py', 'cleaner.py', 'envs', 'env_process.py', 'main_backup.py']
+HIDDENDIRS = []#"/proc", "/usr/lib/python", "/home/"]
 RETORTS = ["haha you tried to find restricted directory :))) go and fly kite", "pls stop coding and go outside, you need exercise :))", "oi what you think you doing ah", "you think you v pro isit", "you could be doing more productive things than trying to hack a sad python bot :("]
 ILLEGAL_KEYWORDS=["exec"]
 GLOBAL_VARS = ["OWNER_ID", "HIDDENFILES", "HIDDENDIRS", "RETORTS", "TOKEN", "ILLEGAL_KEYWORDS"]
@@ -23,7 +23,7 @@ GLOBAL_VARS = ["OWNER_ID", "HIDDENFILES", "HIDDENDIRS", "RETORTS", "TOKEN", "ILL
 async def on_ready():
     print(f'{client.user.name} has connected to Discord!')
     await client.change_presence(activity=discord.Activity(
-        type=discord.ActivityType.watching, name='for "import this"'))
+        type=discord.ActivityType.watching, name='for py```import this```'))
 
 @client.event
 async def on_member_join(member):
@@ -119,6 +119,7 @@ async def on_message(message):
             await owner.send("restoring files... ")
             restore_files()
             await owner.send("Success! ")
+            return
 
     if message.guild is None:
         await addAlert(message, OWNER_ID, "user pmed bot", client)
