@@ -39,7 +39,7 @@ def prepend():
 import importlib
 
 def secure_importer(name, globals=None, locals=None, fromlist=(), level=0):
-    not_allowed = ["os"]#, "importlib", "wget", "urllib", "requests"]
+    not_allowed = []#["os", "importlib", "wget", "urllib", "requests"]
     frommodule = globals['__name__'] if globals else None
     if name in not_allowed:
         print(f'50d96c61-f56d-4704-b781-b36cc2953b16 {name} ')
@@ -54,7 +54,7 @@ async def child(proc):
     await proc.wait()
 
 async def run_async():
-    timeout = 5
+    timeout = 120
     out = ''
     create = asyncio.create_subprocess_shell(
     'python envGLOB.py',

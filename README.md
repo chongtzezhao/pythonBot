@@ -10,3 +10,5 @@ Future:
 - Multiple request handling done with asynchronous subprocess execution using the [https://docs.python.org/3/library/asyncio.html](asyncio) module. Timeout henced increased to 120 seconds
 - Environments are implemented using json files. Sets are currently not supported due to lack of native json compatibility.
 
+## Version 0.2.1
+- Added a file cleaner/manager which sieves through the files and deletes any new ones. Also able to contact owner (through telegram) to restore original files.

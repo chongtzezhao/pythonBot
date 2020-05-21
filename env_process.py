@@ -58,6 +58,7 @@ def output_env(code):
 def write_env(name, data):
     global SEP
     lines = data.split('\n')
+    print(data)
     from_file = json.load(open(f'envs/{name}.json'))
     original = copy.deepcopy(from_file)
     print("json:",from_file)
@@ -65,7 +66,7 @@ def write_env(name, data):
     for line in lines:
         if not line: continue
         arr = line.split(SEP)
-        if len(arr) < 3:
+        if len(arr)<3:
             try:
                 del from_file['vars'][arr[0]]
             except:

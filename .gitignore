@@ -3,5 +3,6 @@
 /envs
 envGLOB.py
 poetry.lock
+pyproject.toml
 spam_data.json
 detect_spam.py
