@@ -122,7 +122,7 @@ async def on_message(message):
             return
 
     if message.content == 'py help':
-        await message.channel.send('I am help you with anything! (regarding python of course)\nStart your message with the keyphrase "py" and enclose your code within backticks aka "``" and watch the magic happen!\n\nFind my source code on https://github.com/thepoppycat/pythonBot')
+        await message.channel.send('I am here to help you with anything! (regarding python of course)\nStart your message with the keyphrase "py" and enclose your code within backticks aka "``" and watch the magic happen!\n\nFind my source code on https://github.com/thepoppycat/pythonBot')
         return
 
     if message.guild is None:
