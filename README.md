@@ -7,7 +7,7 @@ Future:
 - [x] ~~"environments" or "workspaces", i.e. imports, variables and functions will be saved~~ Variables preserved
 
 ## Version 0.2.0
-- Multiple request handling done with asynchronous subprocess execution using the [https://docs.python.org/3/library/asyncio.html](asyncio) module. Timeout henced increased to 120 seconds
+- Multiple request handling done with asynchronous subprocess execution using the [asyncio](https://docs.python.org/3/library/asyncio.html) module. Timeout henced increased to 120 seconds
 - Environments are implemented using json files. Sets are currently not supported due to lack of native json compatibility.
 
 ## Version 0.2.1
@@ -18,5 +18,7 @@ Future:
 - Moved telegram bot token to a secret location to prevent misuse or spam
 
 If all goes well, will move to 1.0, allowing the exec function and executing code in user pms.
+
+You can invite the bot at: https://discord.com/api/oauth2/authorize?client_id=707190628408098899&permissions=0&scope=bot
 
 Thanks for reading! If you find any bugs or security issues, please let me know on discord, at thepoppycat#3897!
