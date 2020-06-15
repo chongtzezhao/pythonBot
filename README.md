@@ -17,7 +17,10 @@ Future:
 - Removed all import, file, or directory restrictions, basically going full open source (while hopefully maintaining secrecy of bot token)
 - Moved telegram bot token to a secret location to prevent misuse or spam
 
-If all goes well, will move to 1.0, allowing the exec function and executing code in user pms.
+~~If all goes well, will move to 1.0, allowing the exec function and executing code in user pms.~~
+
+## Version 1.0.0
+- :D
 
 You can invite the bot at: https://discord.com/api/oauth2/authorize?client_id=707190628408098899&permissions=0&scope=bot
 

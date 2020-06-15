@@ -5,8 +5,8 @@ import time
 from pprint import pprint
 import requests
 
-ALLOWED = ['pyproject.toml', '.upm', 'poetry.lock', 'envGLOB.py', 'README.md', 'requirements.txt', '__pycache__', 'keep_alive.py', 'process.py', 'alerts.py', 'main.py', 'file_manager.py', 'envs', 'env_process.py', '.gitignore', 'non_program.py']
-RESTORE = ['pyproject.toml', 'poetry.lock', 'README.md', 'requirements.txt', 'keep_alive.py', 'process.py', 'alerts.py', 'main.py', 'file_manager.py', 'env_process.py', '.gitignore', 'non_program.py']
+ALLOWED = ['pyproject.toml', '.upm', 'poetry.lock', 'envGLOB.py', 'README.md', '__pycache__', 'keep_alive.py', 'process.py', 'alerts.py', 'main.py', 'file_manager.py', 'envs', 'env_process.py', '.gitignore', 'non_program.py']
+RESTORE = ['pyproject.toml', 'poetry.lock', 'README.md', 'keep_alive.py', 'process.py', 'alerts.py', 'main.py', 'file_manager.py', 'env_process.py', '.gitignore', 'non_program.py']
 TELEGRAM_BOT_TOKEN = os.getenv('TELEGRAM_BOT_TOKEN')
 os.environ['TELEGRAM_BOT_TOKEN']='[REDACTED]'
 

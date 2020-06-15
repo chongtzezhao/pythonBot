@@ -17,7 +17,7 @@ os.environ["DISCORD_BOT_TOKEN"]="[REDACTED]"
 
 client = discord.Client()
 OWNER_ID = 259680008635809792
-HIDDENFILES = []#'pyproject.toml', '.upm', 'poetry.lock', 'envGLOB.py', 'README.md', 'requirements.txt', '__pycache__', 'keep_alive.py', 'spam_data.json', 'detect_spam.py', 'process.py', 'alerts.py', 'main.py', 'cleaner.py', 'envs', 'env_process.py', 'main_backup.py']
+HIDDENFILES = []#'pyproject.toml', '.upm', 'poetry.lock', 'envGLOB.py', 'README.md', '__pycache__', 'keep_alive.py', 'spam_data.json', 'detect_spam.py', 'process.py', 'alerts.py', 'main.py', 'cleaner.py', 'envs', 'env_process.py', 'main_backup.py']
 HIDDENDIRS = []#"/proc", "/usr/lib/python", "/home/"]
 RETORTS = ["haha you tried to find restricted directory :))) go and fly kite", "pls stop coding and go outside, you need exercise :))", "oi what you think you doing ah", "you think you v pro isit", "you could be doing more productive things than trying to hack a sad python bot :("]
 GLOBAL_VARS = ["OWNER_ID", "HIDDENFILES", "HIDDENDIRS", "RETORTS", "TOKEN", "PAUSED"]
