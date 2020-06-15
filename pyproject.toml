@@ -9,10 +9,9 @@ description = ""
 name = "pythonbot"
 version = "0.1.0"
 [tool.poetry.dependencies]
-python = "^3.7"
-requests = "^2.23"
 discord = "^1.0"
 flask = "^1.1"
-gspread = "^3.6"
-oauth2client = "^4.1"
+python = "^3.8"
+requests = "^2.23"
+pandas = "^1.0"
 [tool.poetry.dev-dependencies]

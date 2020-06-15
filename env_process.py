@@ -8,7 +8,12 @@ import copy
 os.environ['TZ'] = 'Singapore'
 time.tzset()
 
-SEP = '@^&$*#%@'
+GEN_ENV=os.getenv('GEN_ENV')
+os.environ['GEN_ENV']='[REDACTED]'
+
+SEP=os.getenv('SEP')
+os.environ['SEP']='[REDACTED]'
+
 KEYWORDS = {'False', 'None', 'True', 'and', 'as', 'assert', 'break', 'class', 'continue', 'def', 'del', 'elif', 'else', 'except', 'except', 'finally', 'for', 'from', 'global', 'if', 'import', 'in', 'is', 'lambda', 'nonlocal', 'not', 'or', 'pass', 'print', 'raise', 'return', 'try', 'while', 'with', 'yield'}
 
 def load_env(contents):
@@ -31,18 +36,20 @@ def load_env(contents):
         out = ''
         for name in data['vars']:
             value = data['vars'][name]
+            if name.endswith('-set'): # means the array is actually is a set
+                value = set(value)
+                name = name[:-4]
             if type(value)==type(''):
-                value = f'\'{value}\''
-            out+=f'{name}={value}\n'
+                value = value.replace('"', '\\"')
+                value = f'"{value}"'
+            out+=f'{name} = {value}\n'
         return out, env_name
 
 
 def output_env(code):
-    global SEP
-    global KEYWORDS
     new_code = code.replace(';', '\n')
     lines = new_code.split('\n')
-    output = "print('73a3290c-340b-44b1-9899-8542f0894495')\n"
+    output = f"print('{GEN_ENV}')\n"
     for line in lines:
         line = line.strip()
         k = re.match("^[a-zA-Z_][a-zA-Z0-9_]*", line)
@@ -56,7 +63,6 @@ def output_env(code):
     
     
 def write_env(name, data):
-    global SEP
     lines = data.split('\n')
     print(data)
     from_file = json.load(open(f'envs/{name}.json'))
@@ -74,13 +80,16 @@ def write_env(name, data):
             continue
         arr[2] = arr[2].split("'")[1]
         if arr[2]=='str': 
-            arr[1].replace("'", "\'")
-            arr[1] = '\"'+arr[1]+'\"'
-        tmp=eval(arr[1])
-        if arr[2]=='set': tmp=list(eval(arr[1]))
+            tmp = arr[1]
+            print(tmp)
+        else:
+            tmp=eval(arr[1])
+        if arr[2]=='set':
+            tmp=list(tmp)
+            arr[0] += '-set'
         from_file['vars'][arr[0]]=tmp
-    print(from_file)
     print(original)
+    print(from_file)
     print(from_file==original)
     if from_file!=original:
         from_file['time']['modified'] = time.strftime("%Y-%m-%d %H:%M:%S")

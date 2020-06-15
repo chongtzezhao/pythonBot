@@ -2,5 +2,3 @@
 .env
 /envs
 envGLOB.py
-spam_data.json
-detect_spam.py

@@ -1,5 +1,9 @@
 import asyncio
 import subprocess
+import os
+
+FAKE_IMPORT=os.getenv("FAKE_IMPORT")
+os.environ["FAKE_IMPORT"]="[REDACTED]"
 
 async def fakeFileError(message, line, line_num, fileName):
     await message.channel.send(f"""
@@ -42,7 +46,7 @@ def secure_importer(name, globals=None, locals=None, fromlist=(), level=0):
     not_allowed = []#["os", "importlib", "wget", "urllib", "requests"]
     frommodule = globals['__name__'] if globals else None
     if name in not_allowed:
-        print(f'50d96c61-f56d-4704-b781-b36cc2953b16 {name} ')
+        print(f'"""+FAKE_IMPORT+""" {name} ')
 
     return importlib.__import__(name, globals, locals, fromlist, level)
 
